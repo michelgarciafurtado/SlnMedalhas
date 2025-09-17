@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace Application.Interfaces
 {
     public interface IPolicialService
     {
-        public Task<Policial> Create(Policial pol);
-        public Task<Policial> Update(Policial pol);
-        public Task<Policial> GetPolicial(string re);
-        public Task<IEnumerable<Policial>> GetAll();
+        public Task<PolicialDto> Create(PolicialDto pol);
+        public Task<PolicialDto> Update(PolicialDto pol);
+        public Task<PolicialDto> GetPolicial(string re);
+        public Task<IEnumerable<PolicialDto>> GetAll();
     }
 }
