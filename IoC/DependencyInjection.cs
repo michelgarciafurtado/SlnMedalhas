@@ -1,4 +1,6 @@
-﻿using Data.Context;
+﻿using Application.Interfaces;
+using Application.Services;
+using Data.Context;
 using Data.Repositories;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +23,12 @@ namespace IoC
                 , b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<IPolicialRepository, PolicialRepository>();
+            services.AddScoped<IPolicialService, PolicialService>();
             services.AddScoped<IOpmRepository, OpmRepository>();
+            services.AddScoped<IOpmService, OpmService>();
             services.AddScoped<IMedalhaRepository, MedalhaRepository>();
-           
+            services.AddScoped<IMedalhaService, MedalhasService>();
+
 
             return services;
         }

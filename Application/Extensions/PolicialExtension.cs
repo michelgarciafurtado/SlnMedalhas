@@ -33,5 +33,23 @@ namespace Application.Extensions
                 Medalhas = policial.toDto().Medalhas
             };
         }
+
+        internal static Policial FromDto(this PolicialDto pol)
+        {
+            Opm opm = new(
+              pol.Opm.CodOpm,
+              pol.Opm.Descricao,
+              pol.Opm.OPmPai
+            );
+            return new Policial
+            (
+               pol.Re,
+               pol.Nome,
+               pol.PostoGrad,
+               pol.Cpf,
+               opm,
+               pol.Opm.CodOpm
+            );
+        }
     }
 }

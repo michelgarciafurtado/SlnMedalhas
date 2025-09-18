@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.DTO;
+using Application.Interfaces;
+using Domain.Entities;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class OpmService : IOpmRepository
+    public class OpmService : IOpmService
     {
         private readonly IOpmRepository _repository;
 
@@ -16,22 +18,23 @@ namespace Application.Services
         {
             _repository = repository;
         }
-        public Task<Opm> Create(Opm opm)
+
+        public Task<OpmDto> Create(OpmDto opm)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Opm>> GetAll()
+        public Task<IEnumerable<OpmDto>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Opm> GetOpm(string codOpm)
+        public Task<OpmDto> GetOpm(string codOpm)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Opm> Update(Opm opm)
+        public Task<OpmDto> Update(OpmDto opm)
         {
             throw new NotImplementedException();
         }

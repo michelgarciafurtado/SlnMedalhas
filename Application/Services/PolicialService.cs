@@ -1,4 +1,7 @@
-﻿using Domain.Entities;
+﻿using Application.DTO;
+using Application.Extensions;
+using Application.Interfaces;
+using Domain.Entities;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,32 +11,37 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class PolicialService : IPolicialRepository
+    public class PolicialService : IPolicialService
     {
         private readonly IPolicialRepository _repository;
-
         public PolicialService(IPolicialRepository repository)
         {
             _repository = repository;
         }
-        public Task<Policial> Create(Policial pol)
+        public async Task<PolicialDto> Create(PolicialDto pol)
         {
-            throw new NotImplementedException();
+            var policial = await _repository.Create(pol.FromDto());
+            return policial.toDto();
+        }
+        public async Task<IEnumerable<PolicialDto>> GetAll()
+        {
+           var policiais = await _repository.GetAll();
+            List<PolicialDto> policiaisdto = new List<PolicialDto>();
+            foreach (var pol in policiais) {
+                policiaisdto.Add(pol.toDto());
+            }
+            return policiaisdto;
+        }
+        public async Task<PolicialDto> GetPolicial(string re)
+        {
+            var policial = await _repository.GetPolicial(re);
+            return policial.toDto();
         }
 
-        public Task<IEnumerable<Policial>> GetAll()
+        public async Task<PolicialDto> Update(PolicialDto pol)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Policial> GetPolicial(string re)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Policial> Update(Policial pol)
-        {
-            throw new NotImplementedException();
+            var policial = await _repository.Update(pol.FromDto());
+            return policial.toDto();
         }
     }
 }

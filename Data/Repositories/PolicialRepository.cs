@@ -16,7 +16,7 @@ namespace Data.Repositories
         public PolicialRepository(ApplicationDbContext context) {
             _context = context;
         }
-        public async Task<Policial> Create(Policial pol)
+        public async Task<Policial> Create(PolicialDto pol)
         {
             _context.Add(pol);
             await _context.SaveChangesAsync();
