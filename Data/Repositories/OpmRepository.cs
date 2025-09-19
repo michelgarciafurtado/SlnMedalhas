@@ -12,7 +12,7 @@ namespace Data.Repositories
 {
     public class OpmRepository: IOpmRepository
     {
-        private static ApplicationDbContext _context;
+        ApplicationDbContext _context;
 
         public OpmRepository(ApplicationDbContext context)
         {
@@ -21,7 +21,7 @@ namespace Data.Repositories
 
         public async Task<Opm> Create(Opm opm)
         {
-            _context.AddAsync(opm);
+            _context.Add(opm);
             await _context.SaveChangesAsync();
             return opm;
         }

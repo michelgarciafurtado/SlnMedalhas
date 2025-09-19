@@ -12,11 +12,11 @@ namespace Data.Repositories
 {
     public class PolicialRepository : IPolicialRepository
     {
-        private static ApplicationDbContext _context;
+        ApplicationDbContext _context;
         public PolicialRepository(ApplicationDbContext context) {
             _context = context;
         }
-        public async Task<Policial> Create(PolicialDto pol)
+        public async Task<Policial> Create(Policial pol)
         {
             _context.Add(pol);
             await _context.SaveChangesAsync();
@@ -25,12 +25,16 @@ namespace Data.Repositories
 
         public async Task<IEnumerable<Policial>> GetAll()
         {
-            return await _context.Policiais.ToListAsync();
+            return await _context.Policiais
+                .Include(p => p.Opm)
+                .ToListAsync();
         }
 
         public async Task<Policial> GetPolicial(string re)
         {
-            return await _context.Policiais.FindAsync(re);
+            return await _context.Policiais.Include(p => p.Opm)
+                        .Include(p => p.medalhas)
+                        .SingleOrDefaultAsync(p => p.Re == re);
         }
 
         public async Task<Policial> Update(Policial pol)

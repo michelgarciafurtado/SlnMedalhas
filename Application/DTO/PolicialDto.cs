@@ -12,6 +12,7 @@ namespace Application.DTO
         public string Nome { get; set; }
         public string PostoGrad { get; set; }
         public string Cpf { get; set; }
+        public string CodOpm { get; set; }
         public OpmDto Opm { get; set; }
         public List<MedalhaDto> Medalhas { get; set; }
     }

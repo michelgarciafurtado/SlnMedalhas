@@ -13,5 +13,6 @@ namespace Domain.Interfaces
         public Task<Medalha> Update(Medalha medalha); 
         public Task<Medalha> GetMedalha(int id);
         public Task<IEnumerable<Medalha>> GetAll();
+        public Task<IEnumerable<Medalha>> GetMedalhasPolicial(string re);
     }
 }

@@ -11,6 +11,10 @@ namespace Domain.Entities
         public string CodOpm { get; set; }
         public string Descricao { get; set; }
         public string OPmPai { get; set; }
+        public Opm()
+        {
+            
+        }
 
         public Opm(string codopm, string descricao, string opmpai)
         {

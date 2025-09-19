@@ -21,6 +21,12 @@ namespace Data.EntitiesConfiguration
             builder.HasOne(m => m.Policial)
                 .WithMany(p => p.medalhas)
                 .HasForeignKey(m => m.Re);
+
+            builder.Property(m => m.NBolCassacao)
+                .IsRequired(false);
+
+            builder.Property(m => m.DataCassacao)
+                .IsRequired(false);
         }
     }
 }

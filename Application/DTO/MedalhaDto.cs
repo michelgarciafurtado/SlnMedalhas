@@ -8,9 +8,10 @@ namespace Application.DTO
 {
     public class MedalhaDto
     {
-        public string IdMedalha { get; set; }
+        public int IdMedalha { get; set; }
         public string NomeMedalha { get; set; }
-        public string TipoMedalha { get; set; }
+        public int TipoMedalha { get; set; }
+        public string DescricaoMedalha { get; set; }
         public string DataConcessao { get; set; }
         public string NBolConcessao { get; set; }
         public string Re { get; set; }

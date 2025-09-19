@@ -16,18 +16,21 @@ namespace Domain.Entities
         public string CodOpm { get; set; }
         public Opm Opm { get; set; }
         public List<Medalha> medalhas { get; set; }
+        public Policial()
+        {
+            
+        }
 
-        public Policial(string re, string nome, string postograd, string cpf, Opm opm, string codopm)
+        public Policial(string re, string nome, string postograd, string cpf,string codopm)
         {
             DomainExceptionValidation.When(re.Length < 6, "Verifique o preenchimento do RE");
             DomainExceptionValidation.When(string.IsNullOrEmpty(nome),"Nome e obrigatorio");
             DomainExceptionValidation.When(cpf.Length < 11, "CPF deve ser informado com digito");
-            DomainExceptionValidation.When(ValidaCpf.Validar(cpf), "Cpf informado e invalido");
+            DomainExceptionValidation.When(ValidaCpf.Validar(cpf) == true ? false : true, "Cpf informado e invalido");
             Re = re;
             Nome = nome;
             PostoGrad = postograd;
             Cpf = cpf;
-            Opm = opm;
             CodOpm = codopm;
         }
     }

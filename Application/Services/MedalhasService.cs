@@ -1,4 +1,5 @@
 ﻿using Application.DTO;
+using Application.Extensions;
 using Application.Interfaces;
 using Data.Repositories;
 using Domain.Interfaces;
@@ -13,28 +14,49 @@ namespace Application.Services
     public class MedalhasService : IMedalhaService
     {
         private readonly IMedalhaRepository _repository;
-        public MedalhasService(MedalhaRepository repository) {
+        public MedalhasService(IMedalhaRepository repository) {
             _repository = repository;
 
         }
-        public Task<MedalhaDto> Create(MedalhaDto medalha)
+        public async Task<MedalhaDto> Create(MedalhaDto medalha)
         {
-            throw new NotImplementedException();
+            var me = await _repository.Create(medalha.fromDto());
+            return me.toDto();
         }
 
-        public Task<IEnumerable<MedalhaDto>> GetAll()
+        public async Task<IEnumerable<MedalhaDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var medalhas = await _repository.GetAll();
+            List<MedalhaDto> listMedalhas = new List<MedalhaDto>();
+            foreach (var item in medalhas)
+            {
+                listMedalhas.Add(item.toDto());
+            }
+            return listMedalhas;
         }
 
-        public Task<MedalhaDto> GetMedalha(int id)
+        public async Task<MedalhaDto> GetMedalha(int id)
         {
-            throw new NotImplementedException();
+            var medalha = await _repository.GetMedalha(id);
+            return medalha.toDto();
         }
 
-        public Task<MedalhaDto> Update(MedalhaDto medalha)
+        public async Task<IEnumerable<MedalhaDto>> GetMedalhasPolicial(string re)
         {
-            throw new NotImplementedException();
+            var medalhas = await _repository.GetMedalhasPolicial(re);
+            List<MedalhaDto> listMedalhas = new List<MedalhaDto>();
+            foreach(var medalha in medalhas)
+            {
+                listMedalhas.Add(medalha.toDto());
+            }
+
+            return listMedalhas;
+        }
+
+        public async Task<MedalhaDto> Update(MedalhaDto medalha)
+        {
+            var me = await _repository.Update(medalha.fromDto());
+            return me.toDto();
         }
     }
 }

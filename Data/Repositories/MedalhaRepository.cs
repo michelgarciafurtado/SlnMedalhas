@@ -12,7 +12,7 @@ namespace Data.Repositories
 {
     public class MedalhaRepository : IMedalhaRepository
     {
-        private static ApplicationDbContext _context;
+        ApplicationDbContext _context;
 
         public MedalhaRepository(ApplicationDbContext context)
         {
@@ -21,7 +21,7 @@ namespace Data.Repositories
 
         public async Task<Medalha> Create(Medalha medalha)
         {
-            _context.AddAsync(medalha);
+            _context.Add(medalha);
             await _context.SaveChangesAsync();
             return medalha;
         }
@@ -34,6 +34,13 @@ namespace Data.Repositories
         public async Task<Medalha> GetMedalha(int id)
         {
             return await _context.Medalhas.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Medalha>> GetMedalhasPolicial(string re)
+        {
+            return await _context.Medalhas
+                .Where(m => m.Re == re)    
+                .ToListAsync();
         }
 
         public async Task<Medalha> Update(Medalha medalha)

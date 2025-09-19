@@ -17,37 +17,40 @@ namespace Application.Extensions
             { 
                 Re = policial.Re,
                 Nome = policial.Nome,
+                PostoGrad = policial.PostoGrad,
                 Cpf = policial.Cpf,
-                Opm = policial.toDto().Opm 
+                CodOpm = policial.CodOpm,
+                Opm = policial.Opm.toDto(),
             };
         }
 
         public static PolicialDto toDtoMedalhas(this Policial policial)
         {
+            var medalhas = policial.medalhas;
+            List<MedalhaDto> listmedalhas = new List<MedalhaDto>();
+            foreach (var item in medalhas)
+            {
+                listmedalhas.Add(item.toDto());
+            }
             return new PolicialDto
             {
                 Re = policial.Re,
                 Nome = policial.Nome,
+                PostoGrad = policial.PostoGrad,
                 Cpf = policial.Cpf,
                 Opm = policial.toDto().Opm,
-                Medalhas = policial.toDto().Medalhas
+                Medalhas = listmedalhas
             };
         }
 
         internal static Policial FromDto(this PolicialDto pol)
         {
-            Opm opm = new(
-              pol.Opm.CodOpm,
-              pol.Opm.Descricao,
-              pol.Opm.OPmPai
-            );
             return new Policial
             (
                pol.Re,
                pol.Nome,
                pol.PostoGrad,
                pol.Cpf,
-               opm,
                pol.Opm.CodOpm
             );
         }

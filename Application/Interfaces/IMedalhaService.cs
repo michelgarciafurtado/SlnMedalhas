@@ -13,5 +13,6 @@ namespace Application.Interfaces
         public Task<MedalhaDto> Update(MedalhaDto medalha);
         public Task<MedalhaDto> GetMedalha(int id);
         public Task<IEnumerable<MedalhaDto>> GetAll();
+        public Task<IEnumerable<MedalhaDto>> GetMedalhasPolicial(string re);
     }
 }

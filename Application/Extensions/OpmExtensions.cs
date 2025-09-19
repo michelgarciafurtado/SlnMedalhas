@@ -1,4 +1,5 @@
 ﻿using Application.DTO;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Application.Extensions
 {
-    internal static class OpmExtesions
+    internal static class OpmExtensions
     {
-        public static OpmDto toDto(this OpmDto opm)
+        public static OpmDto toDto(this Opm opm)
         {
             return new OpmDto
             {
@@ -19,6 +20,16 @@ namespace Application.Extensions
                 OPmPai = opm.OPmPai
             };
 
+        }
+
+        public static Opm fromDto(this OpmDto opm)
+        {
+            return new Opm
+            (
+                opm.CodOpm,
+                opm.Descricao,
+                opm.OPmPai
+            );
         }
     }
 }

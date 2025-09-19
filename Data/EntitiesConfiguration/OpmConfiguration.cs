@@ -14,6 +14,12 @@ namespace Data.EntitiesConfiguration
         {
             builder.ToTable("Tbl_Opm");
             builder.HasKey(o => o.CodOpm);
+
+            builder.HasData(
+                new Opm("607070000", "7.bpm/i", "607000000"),
+                new Opm("607500000", "50.bpm/i", "607000000"),
+                new Opm("607400000", "40.bpm/i", "607000000")
+                );
         }
     }
 }

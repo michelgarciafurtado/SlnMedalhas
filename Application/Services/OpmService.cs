@@ -1,4 +1,5 @@
 ﻿using Application.DTO;
+using Application.Extensions;
 using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -12,31 +13,40 @@ namespace Application.Services
 {
     public class OpmService : IOpmService
     {
-        private readonly IOpmRepository _repository;
+        IOpmRepository _repository;
 
         public OpmService(IOpmRepository repository)
         {
             _repository = repository;
         }
 
-        public Task<OpmDto> Create(OpmDto opm)
+        public async Task<OpmDto> Create(OpmDto opm)
         {
-            throw new NotImplementedException();
+            var entity = await _repository.Create(opm.fromDto());
+            return entity.toDto();
         }
 
-        public Task<IEnumerable<OpmDto>> GetAll()
+        public async Task<IEnumerable<OpmDto>> GetAll()
         {
-            throw new NotImplementedException();
+            List<OpmDto> listaOpmDto = new List<OpmDto>();
+            var Opms = await _repository.GetAll();
+            foreach (var opm in Opms)
+            {
+                listaOpmDto.Add(opm.toDto());
+            }
+            return listaOpmDto;
         }
 
-        public Task<OpmDto> GetOpm(string codOpm)
+        public async Task<OpmDto> GetOpm(string codOpm)
         {
-            throw new NotImplementedException();
+            var entity = await _repository.GetOpm(codOpm);
+            return entity.toDto();
         }
 
-        public Task<OpmDto> Update(OpmDto opm)
+        public async Task<OpmDto> Update(OpmDto opm)
         {
-            throw new NotImplementedException();
+           var entity =  await _repository.Update(opm.fromDto());
+            return entity.toDto() ;
         }
     }
 }

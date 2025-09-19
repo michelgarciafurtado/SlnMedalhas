@@ -10,16 +10,17 @@ namespace Domain.Validation
     {
         public static bool Validar(string cpf)
         {
+            bool evalido = true;
             // Remove caracteres não numéricos
             cpf = new string(cpf.Where(char.IsDigit).ToArray());
 
             // Verifica se tem 11 dígitos
             if (cpf.Length != 11)
-                return false;
+                evalido = false;
 
             // Verifica se todos os dígitos são iguais
-            if (cpf.Distinct().Count() == 1)
-                return false;
+            if (cpf.All(c => c == cpf[0]))
+                evalido = false;
 
             // Calcula primeiro dígito verificador
             int soma = 0;
@@ -31,7 +32,7 @@ namespace Domain.Validation
 
             // Verifica primeiro dígito
             if (int.Parse(cpf[9].ToString()) != digito1)
-                return false;
+                evalido = false;
 
             // Calcula segundo dígito verificador
             soma = 0;
@@ -39,10 +40,12 @@ namespace Domain.Validation
                 soma += int.Parse(cpf[i].ToString()) * (11 - i);
 
             resto = soma % 11;
-            int digito2 = resto < 2 ? 0 : 11 - resto;
-
             // Verifica segundo dígito
-            return int.Parse(cpf[10].ToString()) == digito2;
+            int digito2 = resto < 2 ? 0 : 11 - resto;
+            if (int.Parse(cpf[10].ToString()) != digito2)
+                evalido = false;
+
+            return evalido;
         }
     }
     
